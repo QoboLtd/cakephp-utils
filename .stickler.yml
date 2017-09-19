@@ -3,4 +3,4 @@ linters:
     standard: CakePHP
     extensions: '.php,.ctp'
 files:
-  ignore: ['config/*', 'tests/*']
+  ignore: ['config/*', 'tests/*', 'webroot/plugins/*']

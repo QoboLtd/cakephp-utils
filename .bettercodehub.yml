@@ -1,6 +1,7 @@
 exclude:
 - /config/.*
 - /webroot/js/.*
+- /webroot/plugins/.*
 languages:
 - javascript
 - php
