@@ -4,14 +4,10 @@
         "booleanString": {
             "title": "Boolean string",
             "description": "Shortcut for defining boolean strings that can be empty or null",
-            "anyOf": [
-                {
-                    "type": "string",
-                    "enum": ["", "0", "1"]
-                },
-                {
-                    "type": "null"
-                }
+            "oneOf": [
+                { "type": "string", "enum": ["", "0", "1"] },
+                { "type": "boolean" },
+                { "type": "null" }
             ]
         },
         "migrationField": {
@@ -34,21 +30,21 @@
                 "required": {
                     "title": "Required flag",
                     "description": "Defines whether or not the field is required",
-                    "anyOf": [
+                    "oneOf": [
                         { "$ref": "#/definitions/booleanString" }
                     ]
                 },
                 "non-searchable": {
                     "title": "Searchable flag",
                     "description": "Defines whether or not the field is searchable",
-                    "anyOf": [
+                    "oneOf": [
                         { "$ref": "#/definitions/booleanString" }
                     ]
                 },
                 "unique": {
                     "title": "Unique flag",
                     "description": "Defines whether or not the field is contains unique value",
-                    "anyOf": [
+                    "oneOf": [
                         { "$ref": "#/definitions/booleanString" }
                     ]
                 }

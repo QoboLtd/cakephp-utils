@@ -1,6 +1,15 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "definitions": {
+        "booleanString": {
+            "title": "Boolean string",
+            "description": "Shortcut for defining boolean strings that can be empty or null",
+            "oneOf": [
+                { "type": "string", "enum": ["", "0", "1"] },
+                { "type": "boolean" },
+                { "type": "null" }
+            ]
+        },
         "fieldName": {
             "title": "Module field name",
             "description": "A single module field name",
@@ -44,7 +53,7 @@
                 "typeahead_fields": {
                     "title": "Type-ahead fields",
                     "description": "Array or comma-separated string with list of fields to use for searching in type-ahead lookups",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
@@ -59,7 +68,7 @@
                 "permissions_parent_modules": {
                     "title": "Parent modules",
                     "description": "Array or comma-separated string with list of parent modules to use them in access control",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
@@ -74,7 +83,7 @@
                 "lookup_fields": {
                     "title": "Lookup fields",
                     "description": "Array or comma-separated string with list of fields to use in the URL for locating module record",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
@@ -89,7 +98,7 @@
                 "basic_search_fields": {
                     "title": "Basic search fields",
                     "description": "Array or comma-separated string with list of fields to use in the basic search",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
@@ -104,7 +113,7 @@
                 "allow_reminders": {
                     "title": "Allow reminders",
                     "description": "Array or comma-separated string with list of modules for which reminders are allowed",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
@@ -119,7 +128,9 @@
                 "translatable": {
                     "title": "Translatable flag",
                     "description": "Whether or not the module is translatable",
-                    "type": "boolean"
+                    "oneOf": [
+                        { "$ref": "#/definitions/booleanString" }
+                    ]
                 }
             },
             "additionalProperties": false
@@ -130,7 +141,7 @@
             "type": "object",
             "properties": {},
             "additionalProperties": {
-                "anyOf": [
+                "oneOf": [
                     { "type": "string" },
                     {
                         "type": "array",
@@ -162,7 +173,7 @@
                 "modules": {
                     "title": "List of many-to-many modules",
                     "description": "Array or comma-separated string with list of modules for many-to-many relationship",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
@@ -185,16 +196,14 @@
                 "enable": {
                     "title": "Enable or disable email notifications for calendar events",
                     "description": "If enabled, users will receive email notifications with vCal attachments",
-                    "anyOf": [
-                        { "type": "string", "enum": ["", "true", "false"] },
-                        { "type": "boolean" },
-                        { "type": "null" }
+                    "oneOf": [
+                        { "$ref": "#/definitions/booleanString" }
                     ]
                 },
                 "ignored_fields": {
                     "title": "Ignore notifications on modified fields",
                     "description": "Array or comma-separated string with list of fields, which if only these are modified, do not send notifications",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
@@ -277,7 +286,7 @@
                 "hide_associations": {
                     "title": "List of hidden associations",
                     "description": "Array or comma-separated string with list of associations that should not be displayed",
-                    "anyOf": [
+                    "oneOf": [
                         { "type": "string" },
                         {
                             "type": "array",
