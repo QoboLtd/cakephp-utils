@@ -10,6 +10,21 @@
                 { "type": "null" }
             ]
         },
+        "fieldType": {
+            "title": "Field type",
+            "description": "Support field types and formats",
+            "oneOf": [
+                { "type": "string", "enum": ["uuid", "integer", "decimal", "string", "text", "blob", "date", "time", "datetime", "reminder", "boolean", "url", "email", "phone", "files"] },
+                { "type": "string", "pattern": "^string\\([0-9]+\\)$" },
+                { "type": "string", "pattern": "^decimal\\([0-9]+\\.[0-9]+\\)$" },
+                { "type": "string", "pattern": "^related\\([A-Z]+.*\\)$" },
+                { "type": "string", "pattern": "^list\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^dblist\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^sublist\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^money\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^metric\\([A-z0-0]+.*\\)$" }
+            ]
+        },
         "migrationField": {
             "title": "Migration field",
             "description": "Representation of a single field from migrations.csv",
@@ -24,8 +39,9 @@
                 "type": {
                     "title": "Field type",
                     "description": "Database field type (think: field handlers)",
-                    "type": "string",
-                    "minLength": 1
+                    "oneOf": [
+                        { "$ref": "#/definitions/fieldType" }
+                    ]
                 },
                 "required": {
                     "title": "Required flag",
