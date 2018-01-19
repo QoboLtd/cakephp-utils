@@ -14,7 +14,6 @@ namespace Qobo\Utils\ModuleConfig\Parser\Csv;
 use InvalidArgumentException;
 use League\Csv\Reader;
 use Qobo\Utils\ModuleConfig\Parser\AbstractParser;
-use StdClass;
 
 abstract class AbstractCsvParser extends AbstractParser
 {
@@ -36,7 +35,7 @@ abstract class AbstractCsvParser extends AbstractParser
     /**
      * Get empty result
      *
-     * @return \StdClass
+     * @return \stdClass
      */
     protected function getEmptyResult()
     {

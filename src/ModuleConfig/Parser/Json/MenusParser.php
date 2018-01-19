@@ -24,10 +24,10 @@ class MenusParser extends AbstractJsonParser
      * JSON schema
      *
      * This can either be a string, pointing to the file
-     * or an StdClass with an instance of an already parsed
+     * or an stdClass with an instance of an already parsed
      * schema
      *
-     * @var string|\StdClass $schema JSON schema
+     * @var string|\stdClass $schema JSON schema
      */
     protected $schema = 'file://' . __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Schema' . DIRECTORY_SEPARATOR . 'menus.json';
 }

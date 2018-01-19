@@ -16,7 +16,6 @@ use InvalidArgumentException;
 use Piwik\Ini\IniReader;
 use Qobo\Utils\ModuleConfig\Parser\AbstractParser;
 use Qobo\Utils\Utility;
-use StdClass;
 
 abstract class AbstractIniParser extends AbstractParser
 {

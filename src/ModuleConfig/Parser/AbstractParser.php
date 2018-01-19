@@ -17,7 +17,7 @@ use League\JsonGuard\Dereferencer;
 use League\JsonGuard\Validator;
 use Qobo\Utils\ErrorTrait;
 use Qobo\Utils\Utility;
-use StdClass;
+use stdClass;
 
 abstract class AbstractParser implements ParserInterface
 {
@@ -27,10 +27,10 @@ abstract class AbstractParser implements ParserInterface
      * JSON schema
      *
      * This can either be a string, pointing to the file
-     * or an StdClass with an instance of an already parsed
+     * or an stdClass with an instance of an already parsed
      * schema
      *
-     * @var string|StdClass $schema JSON schema
+     * @var string|\stdClass $schema JSON schema
      */
     protected $schema;
 
@@ -83,11 +83,11 @@ abstract class AbstractParser implements ParserInterface
     /**
      * Get empty result
      *
-     * @return \StdClass
+     * @return \stdClass
      */
     protected function getEmptyResult()
     {
-        return new StdClass();
+        return new stdClass();
     }
 
     /**

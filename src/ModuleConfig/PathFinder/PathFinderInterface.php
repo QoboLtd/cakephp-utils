@@ -11,6 +11,8 @@
  */
 namespace Qobo\Utils\ModuleConfig\PathFinder;
 
+use Qobo\Utils\ErrorAwareInterface;
+
 /**
  * PathFinderInterface Interface
  *
@@ -21,7 +23,7 @@ namespace Qobo\Utils\ModuleConfig\PathFinder;
  *
  * @author Leonid Mamchenkov <l.mamchenkov@qobo.biz>
  */
-interface PathFinderInterface
+interface PathFinderInterface extends ErrorAwareInterface
 {
     /**
      * Find path
@@ -32,18 +34,4 @@ interface PathFinderInterface
      * @return null|string|array Null for not found, string for single path, array for multiple paths
      */
     public function find($module, $path = null, $validate = true);
-
-    /**
-     * Get finder errors
-     *
-     * @return array List of errors from last find
-     */
-    public function getErrors();
-
-    /**
-     * Get finder warnings
-     *
-     * @return array List of warnings from last find
-     */
-    public function getWarnings();
 }

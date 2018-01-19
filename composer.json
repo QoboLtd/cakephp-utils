@@ -11,16 +11,21 @@
             "role": "Developer"
         }
     ],
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "5.6"
+        }
+    },
     "require": {
         "admad/cakephp-jwt-auth": "^2.0",
         "alt3/cakephp-swagger": "^1.0",
+        "arvenil/ninja-mutex": "^0.6",
         "burzum/cakephp-file-storage": "^1.2",
         "burzum/cakephp-imagine-plugin": "^2.1",
         "cakedc/users": "^4.0",
-        "cakephp/cakephp": "^3.4.0 <3.5.0",
+        "cakephp/cakephp": "^3.5.0",
         "cakephp/migrations": "~1.0",
-        "doctrine/annotations": "v1.4.0",
-        "doctrine/instantiator": "1.0.5",
         "friendsofcake/crud": "^4.3",
         "fzaninotto/faker": "^1.0",
         "league/csv": "^8.1",
@@ -31,7 +36,7 @@
         "myclabs/php-enum": "^1.5",
         "piwik/ini": "^1.0",
         "pyrech/composer-changelogs": "^1.4",
-        "zircote/swagger-php": "2.0.8"
+        "rlanvin/php-rrule": "^1.6"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.0",

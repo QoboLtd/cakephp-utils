@@ -11,7 +11,7 @@
  */
 namespace Qobo\Utils\ModuleConfig\Parser\Ini;
 
-use StdClass;
+use stdClass;
 
 /**
  * Config INI Parser
@@ -26,10 +26,10 @@ class ConfigParser extends AbstractIniParser
      * JSON schema
      *
      * This can either be a string, pointing to the file
-     * or an StdClass with an instance of an already parsed
+     * or an stdClass with an instance of an already parsed
      * schema
      *
-     * @var string|StdClass $schema JSON schema
+     * @var string|\stdClass $schema JSON schema
      */
     protected $schema = 'file://' . __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Schema' . DIRECTORY_SEPARATOR . 'config.json';
 
@@ -75,7 +75,7 @@ class ConfigParser extends AbstractIniParser
         foreach ($this->defaults as $section => $options) {
             // Make sure the section exists
             if (!property_exists($data, $section)) {
-                $data->$section = new StdClass();
+                $data->$section = new stdClass();
             }
             // Make sure default values are set
             foreach ($options as $option => $value) {

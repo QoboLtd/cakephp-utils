@@ -15,7 +15,7 @@ use Exception;
 use InvalidArgumentException;
 use Qobo\Utils\ModuleConfig\Parser\AbstractParser;
 use Qobo\Utils\Utility;
-use StdClass;
+use stdClass;
 
 abstract class AbstractJsonParser extends AbstractParser
 {

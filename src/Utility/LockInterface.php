@@ -9,20 +9,21 @@
  * @copyright     Copyright (c) Qobo Ltd. (https://www.qobo.biz)
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Qobo\Utils\ModuleConfig\Parser;
+namespace Qobo\Utils\Utility;
 
-use Qobo\Utils\ErrorAwareInterface;
-
-interface ParserInterface extends ErrorAwareInterface
+interface LockInterface
 {
     /**
-     * Parse
+     * lock method
      *
-     * Parses a given file according to the specified options
-     *
-     * @param string $path    Path to file
-     * @param array  $options Options for parsing
-     * @return object
+     * @return bool
      */
-    public function parse($path, array $options = []);
+    public function lock();
+
+    /**
+     * unlock method
+     *
+     * @return bool
+     */
+    public function unlock();
 }

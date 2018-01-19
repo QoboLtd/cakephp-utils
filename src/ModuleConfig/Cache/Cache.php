@@ -13,6 +13,7 @@ namespace Qobo\Utils\ModuleConfig\Cache;
 
 use Cake\Cache\Cache as CakeCache;
 use InvalidArgumentException;
+use Qobo\Utils\ErrorAwareInterface;
 use Qobo\Utils\ErrorTrait;
 
 /**
@@ -23,7 +24,7 @@ use Qobo\Utils\ErrorTrait;
  *
  * @author Leonid Mamchenkov <l.mamchenkov@qobo.biz>
  */
-class Cache
+class Cache implements ErrorAwareInterface
 {
     use ErrorTrait;
 

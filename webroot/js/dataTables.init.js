@@ -44,12 +44,6 @@ DataTablesInit.prototype = {
                     'Authorization': 'Bearer ' + this.options.ajax.token
                 },
                 data: function (d) {
-                    // batch specific options
-                    if (that.options.batch) {
-                        d.primary_key = 1;
-                        d.order[0].column -= 1;
-                    }
-
                     if (that.options.ajax.extras) {
                         d = $.extend({}, d, that.options.ajax.extras);
                     }
@@ -57,12 +51,29 @@ DataTablesInit.prototype = {
                     d.limit = d.length;
                     d.page = 1 + d.start / d.length;
 
+                    var sort = that.options.ajax.columns[d.order[0].column];
+
+                    // sort by virtual field
+                    if (that.options.ajax.hasOwnProperty('virtualColumns') && that.options.ajax.virtualColumns[sort]) {
+                        sort = that.options.ajax.virtualColumns[sort].join();
+                    }
+
+                    // sort by combined field
+                    if (that.options.ajax.hasOwnProperty('combinedColumns') && that.options.ajax.combinedColumns[sort]) {
+                        sort = that.options.ajax.combinedColumns[sort].join();
+                    }
+
+                    d.sort = sort;
+                    d.direction = d.order[0].dir;
+
                     return d;
                 },
                 dataFilter: function (d) {
                     d = jQuery.parseJSON(d);
                     d.recordsTotal = d.pagination.count;
                     d.recordsFiltered = d.pagination.count;
+
+                    d.data = that.dataFormatter(d.data);
 
                     return JSON.stringify(d);
                 }
@@ -90,9 +101,53 @@ DataTablesInit.prototype = {
             settings.stateDuration = this.options.state.duration;
         }
 
+        // Fetching alerted errors into callback
+        $.fn.dataTable.ext.errMode = function (settings, techNote, message) {
+            console.log(message);
+        };
+
         var table = $(this.options.table_id).DataTable(settings);
 
         return table;
+    },
+
+    dataFormatter: function (data) {
+        var result = [];
+
+        var columns = this.options.ajax.columns;
+        var combinedColumns = this.options.ajax.hasOwnProperty('combinedColumns') ?
+            this.options.ajax.combinedColumns :
+            [];
+
+        var length = columns.length;
+        for (var key in data) {
+            if (!data.hasOwnProperty(key)) {
+                continue;
+            }
+
+            result[key] = [];
+            for (i = 0; i < length; i++) {
+                var column = columns[i];
+                var value = [];
+
+                // normal field
+                if (data[key][column]) {
+                    value.push(data[key][column]);
+                }
+
+                // combined field
+                if (combinedColumns[column]) {
+                    var len = combinedColumns[column].length;
+                    for (x = 0; x < len; x++) {
+                        value.push(data[key][combinedColumns[column][x]]);
+                    }
+                }
+
+                result[key].push(value.join(' '));
+            }
+        }
+
+        return result;
     },
 
     batchToggle: function (table) {

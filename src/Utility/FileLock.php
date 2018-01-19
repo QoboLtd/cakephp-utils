@@ -11,81 +11,41 @@
  */
 namespace Qobo\Utils\Utility;
 
-use InvalidArgumentException;
-use RuntimeException;
+use Cake\Core\Configure;
+use NinjaMutex\Lock\FlockLock;
+use Qobo\Utils\Utility\BaseLock;
 
-final class FileLock
+class FileLock extends BaseLock
 {
     /**
-     * Lock file handler.
-     *
-     * @var resource
+     * @var $lockDir
      */
-    protected $handler;
+    private $lockDir = null;
 
     /**
-     * Lock file path.
+     * __construct method
      *
-     * @var string
+     * @param string $key to use to lock operation
+     * @param string $dir to store lock files
+     * @return void
      */
-    protected $path;
-
-    /**
-     * Initialize lock functionality by creating the lock file.
-     *
-     * @param string $filename File name
-     * @return \Qobo\Utils\Utility\FileLock
-     */
-    public function __construct($filename)
+    public function __construct($key, $dir = null)
     {
-        if (!is_string($filename)) {
-            throw new InvalidArgumentException('Lock filename must be a string');
+        $config = Configure::read('Locker.FileLocker');
+        if (!empty($config['dir'])) {
+            $this->lockDir = $config['dir'];
         }
 
-        $filename = trim($filename);
-
-        if (empty($filename)) {
-            throw new InvalidArgumentException('Lock filename is required');
+        if (!empty($dir)) {
+            $this->lockDir = $dir;
         }
 
-        $filename = basename($filename);
-
-        $this->path = sys_get_temp_dir() . DS . $filename;
-
-        $result = @fopen($this->path, 'w+');
-
-        if (!is_resource($result)) {
-            throw new RuntimeException('Fail to create lock file [' . $this->path . ']');
+        if (empty($this->lockDir)) {
+            $this->lockDir = sys_get_temp_dir();
         }
 
-        $this->handler = $result;
+        $lock = new FlockLock($this->lockDir);
 
-        return $this;
-    }
-
-    /**
-     * Lock the file.
-     *
-     * @return bool
-     */
-    public function lock()
-    {
-        return flock($this->handler, LOCK_EX | LOCK_NB);
-    }
-
-    /**
-     * Unlock the file.
-     *
-     * @return bool
-     */
-    public function unlock()
-    {
-        $result = flock($this->handler, LOCK_UN);
-
-        fclose($this->handler);
-
-        unlink($this->path);
-
-        return $result;
+        parent::__construct($key, $lock);
     }
 }
