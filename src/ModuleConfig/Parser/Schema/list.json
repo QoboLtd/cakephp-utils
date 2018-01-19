@@ -1,6 +1,15 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "definitions": {
+        "booleanString": {
+            "title": "Boolean string",
+            "description": "Shortcut for defining boolean strings that can be empty or null",
+            "oneOf": [
+                { "type": "string", "enum": ["", "0", "1"] },
+                { "type": "boolean" },
+                { "type": "null" }
+            ]
+        },
         "listItem": {
             "title": "List item",
             "description": "Single list item definition (hierarchical)",
@@ -22,14 +31,8 @@
                 "inactive": {
                     "title": "Inactive",
                     "description": "Whether or not the item is active",
-                    "anyOf": [
-                        {
-                            "type": "string",
-                            "enum": ["", "0", "1"]
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "oneOf": [
+                        { "$ref": "#/definitions/booleanString" }
                     ]
                 },
                 "children": {

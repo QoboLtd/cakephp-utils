@@ -4,14 +4,25 @@
         "booleanString": {
             "title": "Boolean string",
             "description": "Shortcut for defining boolean strings that can be empty or null",
-            "anyOf": [
-                {
-                    "type": "string",
-                    "enum": ["", "0", "1"]
-                },
-                {
-                    "type": "null"
-                }
+            "oneOf": [
+                { "type": "string", "enum": ["", "0", "1"] },
+                { "type": "boolean" },
+                { "type": "null" }
+            ]
+        },
+        "fieldType": {
+            "title": "Field type",
+            "description": "Support field types and formats",
+            "oneOf": [
+                { "type": "string", "enum": ["uuid", "integer", "decimal", "string", "text", "blob", "date", "time", "datetime", "reminder", "boolean", "url", "email", "phone", "files"] },
+                { "type": "string", "pattern": "^string\\([0-9]+\\)$" },
+                { "type": "string", "pattern": "^decimal\\([0-9]+\\.[0-9]+\\)$" },
+                { "type": "string", "pattern": "^related\\([A-Z]+.*\\)$" },
+                { "type": "string", "pattern": "^list\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^dblist\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^sublist\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^money\\([A-z0-0]+.*\\)$" },
+                { "type": "string", "pattern": "^metric\\([A-z0-0]+.*\\)$" }
             ]
         },
         "migrationField": {
@@ -28,27 +39,28 @@
                 "type": {
                     "title": "Field type",
                     "description": "Database field type (think: field handlers)",
-                    "type": "string",
-                    "minLength": 1
+                    "oneOf": [
+                        { "$ref": "#/definitions/fieldType" }
+                    ]
                 },
                 "required": {
                     "title": "Required flag",
                     "description": "Defines whether or not the field is required",
-                    "anyOf": [
+                    "oneOf": [
                         { "$ref": "#/definitions/booleanString" }
                     ]
                 },
                 "non-searchable": {
                     "title": "Searchable flag",
                     "description": "Defines whether or not the field is searchable",
-                    "anyOf": [
+                    "oneOf": [
                         { "$ref": "#/definitions/booleanString" }
                     ]
                 },
                 "unique": {
                     "title": "Unique flag",
                     "description": "Defines whether or not the field is contains unique value",
-                    "anyOf": [
+                    "oneOf": [
                         { "$ref": "#/definitions/booleanString" }
                     ]
                 }

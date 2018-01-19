@@ -1,6 +1,15 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "definitions": {
+        "booleanString": {
+            "title": "Boolean string",
+            "description": "Shortcut for defining boolean strings that can be empty or null",
+            "oneOf": [
+                { "type": "string", "enum": ["", "0", "1"] },
+                { "type": "boolean" },
+                { "type": "null" }
+            ]
+        },
         "fieldOptions": {
             "title": "Field options",
             "description": "Field-level configuration options",
@@ -45,12 +54,16 @@
                 "translatable": {
                     "title": "Translatable button",
                     "description": "Allow Render translatable button",
-                    "type": "boolean"
+                    "oneOf": [
+                        { "$ref": "#/definitions/booleanString" }
+                    ]
                 },
                 "auto-increment": {
                     "title": "Auto-increment flag",
                     "description": "Auto-increment flag",
-                    "type": "boolean"
+                    "oneOf": [
+                        { "$ref": "#/definitions/booleanString" }
+                    ]
                 },
                 "min": {
                     "title": "Minimal value",
