@@ -72,6 +72,31 @@ class Utility
     }
 
     /**
+     * Validator method for UUID strings.
+     *
+     * @param string $value Value to be checked
+     * @return bool
+     * @link https://gist.github.com/Joel-James/3a6201861f12a7acf4f2
+     * @link https://stackoverflow.com/questions/19989481/how-to-determine-if-a-string-is-a-valid-v4-uuid)
+     */
+    public static function isUuid($value)
+    {
+        if (! is_string($value)) {
+            return false;
+        }
+
+        if (36 !== strlen($value)) {
+            return false;
+        }
+
+        if (1 !== preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $value)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Check validity of the given path
      *
      * @throws \InvalidArgumentException when path does not exist or is not readable
