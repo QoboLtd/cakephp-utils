@@ -38,7 +38,7 @@
         "burzum/cakephp-file-storage": "dev-branch-2.0",
         "burzum/cakephp-imagine-plugin": "3.x-dev",
         "cakedc/users": "^8.0",
-        "cakephp/cakephp": "^3.5 <3.7",
+        "cakephp/cakephp": "^3.7.4",
         "cakephp/migrations": "^1.7",
         "friendsofcake/crud": "^5.4",
         "fzaninotto/faker": "^1.0",
