@@ -12,7 +12,7 @@
 namespace Qobo\Utils\ModuleConfig\Parser;
 
 use Qobo\Utils\ErrorAwareInterface;
-use \stdClass;
+use stdClass;
 
 interface ParserInterface extends ErrorAwareInterface
 {

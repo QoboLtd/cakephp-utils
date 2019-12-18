@@ -151,7 +151,7 @@ class EncryptedFieldsBehaviorTest extends TestCase
     public function testEncryptionDisabled(): void
     {
         $this->EncryptedFields->setConfig([
-            'enabled' => false
+            'enabled' => false,
         ]);
         $this->EncryptedFields->initialize([]);
 
@@ -194,7 +194,7 @@ class EncryptedFieldsBehaviorTest extends TestCase
                 'invalid_field' => [
                     'decrypt' => true,
                 ],
-            ]
+            ],
         ]);
 
         $entity = $this->Users->newEntity();
@@ -250,7 +250,7 @@ class EncryptedFieldsBehaviorTest extends TestCase
 
         $this->EncryptedFields->setConfig([
             // Has to be long otherwirse Security class will throw an exception.
-            'encryptionKey' => 'badkeybadkeybadkeybadkeybadkeybadkeybadkeybadkey'
+            'encryptionKey' => 'badkeybadkeybadkeybadkeybadkeybadkeybadkeybadkey',
         ]);
 
         try {
@@ -299,7 +299,7 @@ class EncryptedFieldsBehaviorTest extends TestCase
                             return false;
                         },
                     ],
-                ]
+                ],
             ]
         );
 
@@ -325,8 +325,8 @@ class EncryptedFieldsBehaviorTest extends TestCase
             [
                 'decryptAll' => false,
                 'fields' => [
-                    'name' // should be marked as non decryptable by default.
-                ]
+                    'name', // should be marked as non decryptable by default.
+                ],
             ]
         );
 

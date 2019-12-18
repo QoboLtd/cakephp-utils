@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 class UtilityTest extends TestCase
 {
     public $fixtures = [
-        'plugin.CakeDC/Users.Users'
+        'plugin.CakeDC/Users.Users',
     ];
 
     /**

@@ -57,7 +57,7 @@ class CacheTest extends TestCase
         $params = [
             'one' => 1,
             'two' => 'two',
-            'three' => true
+            'three' => true,
         ];
         $paramsAll = $params;
         $paramsAll[] = $options;

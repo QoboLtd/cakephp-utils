@@ -75,7 +75,7 @@ StorageUtils::generateHashes();
 StorageManager::config('Local', [
     'adapterOptions' => [WWW_ROOT, true],
     'adapterClass' => '\Gaufrette\Adapter\Local',
-    'class' => '\Gaufrette\Filesystem'
+    'class' => '\Gaufrette\Filesystem',
 ]);
 
 EventManager::instance()->on(new BaseListener(Configure::read('FileStorage')));

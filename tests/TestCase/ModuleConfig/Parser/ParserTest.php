@@ -46,12 +46,12 @@ class ParserTest extends TestCase
 
         $this->dataDir = implode(DIRECTORY_SEPARATOR, [
             dirname(dirname(dirname(__DIR__))),
-            'data', 'json'
+            'data', 'json',
         ]);
 
         $this->schemaPath = implode(DIRECTORY_SEPARATOR, [
             dirname(dirname(dirname(__DIR__))),
-            'data', 'schema', 'sample.json'
+            'data', 'schema', 'sample.json',
         ]);
         $this->schema = new Schema($this->schemaPath);
         $this->parser = new Parser($this->schema);
@@ -254,7 +254,7 @@ class ParserTest extends TestCase
     protected function getEmptySchema(): SchemaInterface
     {
         $schemaMock = $this->getMockBuilder(SchemaInterface::class)->getMock();
-        $schemaMock->method('read')->willReturn(new stdClass);
+        $schemaMock->method('read')->willReturn(new stdClass());
         Assert::isInstanceOf($schemaMock, SchemaInterface::class);
 
         return $schemaMock;

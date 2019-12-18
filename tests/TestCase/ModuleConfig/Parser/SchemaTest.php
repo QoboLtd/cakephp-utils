@@ -9,7 +9,7 @@ use Qobo\Utils\Utility\Convert;
 use RuntimeException;
 use Seld\JsonLint\JsonParser;
 use Seld\JsonLint\ParsingException;
-use \stdClass;
+use stdClass;
 
 class SchemaTest extends TestCase
 {
@@ -29,7 +29,7 @@ class SchemaTest extends TestCase
         // All your dir are belong to us!
         $this->schemaPath = implode(DIRECTORY_SEPARATOR, [
             dirname(dirname(dirname(__DIR__))),
-            'data', 'schema'
+            'data', 'schema',
         ]);
     }
 

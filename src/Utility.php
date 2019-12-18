@@ -318,7 +318,7 @@ class Utility
         $requiredIconParams = [
             'url',
             'pattern',
-            'default'
+            'default',
         ];
 
         // passing default icons if no external config present.
@@ -397,7 +397,7 @@ class Utility
             'icons',
             'files',
             '%s',
-            '%s.png'
+            '%s.png',
         ]);
         $url = 'Qobo/Utils.icons/files/%s/%s.png';
 

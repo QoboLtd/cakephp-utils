@@ -11,7 +11,7 @@
  */
 namespace Qobo\Utils\ModuleConfig\Parser;
 
-use \stdClass;
+use stdClass;
 
 interface SchemaInterface
 {

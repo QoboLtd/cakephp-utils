@@ -313,7 +313,7 @@ class ModuleConfig implements ErrorAwareInterface
      * @param mixed[] $options Options for ModuleConfig constructor
      * @return bool
      */
-    public static function exists(string $moduleName, array $options = []) : bool
+    public static function exists(string $moduleName, array $options = []): bool
     {
         $config = (new ModuleConfig(ConfigType::MIGRATION(), $moduleName, null, $options))->parseToArray();
         if (empty($config)) {

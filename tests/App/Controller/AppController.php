@@ -1,7 +1,7 @@
 <?php
 namespace Qobo\Utils\Test\App\Controller;
 
-use \Cake\Controller\Controller;
+use Cake\Controller\Controller;
 
 class AppController extends Controller
 {
@@ -9,7 +9,7 @@ class AppController extends Controller
     {
         parent::initialize();
         $this->loadComponent('Auth', [
-            'authenticate' => ['Form']
+            'authenticate' => ['Form'],
         ]);
 
         $this->loadComponent('Flash');

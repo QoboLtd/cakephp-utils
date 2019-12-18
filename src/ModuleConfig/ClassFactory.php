@@ -110,7 +110,7 @@ class ClassFactory
         }
 
         if (empty($params)) {
-            return new $class;
+            return new $class();
         }
 
         $reflection = new ReflectionClass($class);

@@ -27,7 +27,7 @@ class Schema implements SchemaInterface
      * @var array
      */
     protected $_defaultConfig = [
-        'lint' => false
+        'lint' => false,
     ];
 
     /**

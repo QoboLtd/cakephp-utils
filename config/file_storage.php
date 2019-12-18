@@ -2,20 +2,20 @@
 // Thumbnail sizes
 $thumbnailSizes = [
     'huge' => [
-        'thumbnail' => ['width' => 2000, 'height' => 2000]
+        'thumbnail' => ['width' => 2000, 'height' => 2000],
     ],
     'large' => [
-        'thumbnail' => ['width' => 1024, 'height' => 1024]
+        'thumbnail' => ['width' => 1024, 'height' => 1024],
     ],
     'medium' => [
-        'thumbnail' => ['width' => 500, 'height' => 500]
+        'thumbnail' => ['width' => 500, 'height' => 500],
     ],
     'small' => [
-        'thumbnail' => ['width' => 150, 'height' => 150]
+        'thumbnail' => ['width' => 150, 'height' => 150],
     ],
     'tiny' => [
-        'thumbnail' => ['width' => 50, 'height' => 50]
-    ]
+        'thumbnail' => ['width' => 50, 'height' => 50],
+    ],
 ];
 
 // Burzum File-Storage plugin configuration
@@ -28,7 +28,7 @@ return [
         'association' => 'UploadDocuments',
         'defaultImageSize' => 'huge',
         'imageSizes' => [
-            'file_storage' => $thumbnailSizes
-        ]
-    ]
+            'file_storage' => $thumbnailSizes,
+        ],
+    ],
 ];

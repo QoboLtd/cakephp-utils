@@ -17,7 +17,7 @@ class FootprintBehavior extends Behavior
     protected $_defaultConfig = [
         'created_by' => 'created_by',
         'modified_by' => 'modified_by',
-        'callback' => [User::class, 'getCurrentUser']
+        'callback' => [User::class, 'getCurrentUser'],
     ];
 
     /**

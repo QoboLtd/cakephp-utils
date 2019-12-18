@@ -9,7 +9,6 @@ use Qobo\Utils\ModuleConfig\ModuleConfig;
 use Qobo\Utils\ModuleConfig\Parser\Parser;
 use Qobo\Utils\ModuleConfig\Parser\ParserInterface;
 use Qobo\Utils\ModuleConfig\Parser\Schema;
-
 use Qobo\Utils\Utility\Convert;
 
 class ModuleConfigTest extends TestCase

@@ -38,7 +38,7 @@ class Parser implements ConfigInterface, ParserInterface
         'allowEmptySchema' => true,
         'lint' => false,
         'validate' => false,
-        'validationMode' => Constraint::CHECK_MODE_NORMAL
+        'validationMode' => Constraint::CHECK_MODE_NORMAL,
     ];
 
     /**
@@ -229,7 +229,7 @@ class Parser implements ConfigInterface, ParserInterface
     {
         $config = $this->getConfig();
 
-        $validator = new Validator;
+        $validator = new Validator();
         $validator->validate($data, $schema, $config['validationMode']);
 
         if (!$validator->isValid()) {

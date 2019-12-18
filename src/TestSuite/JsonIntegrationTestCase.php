@@ -30,7 +30,7 @@ class JsonIntegrationTestCase extends IntegrationTestCase
      */
     public $defaultRequestHeaders = [
         'Accept' => 'application/json',
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
     ];
 
     /**
@@ -44,7 +44,7 @@ class JsonIntegrationTestCase extends IntegrationTestCase
         $result = JWT::encode(
             [
                 'sub' => $user,
-                'exp' => time() + 604800
+                'exp' => time() + 604800,
             ],
             Security::getSalt()
         );

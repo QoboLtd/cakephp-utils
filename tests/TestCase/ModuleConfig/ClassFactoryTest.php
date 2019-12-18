@@ -13,7 +13,7 @@ class ClassFactoryTest extends TestCase
     public function testCreate(): void
     {
         $schemaMock = $this->getMockBuilder(SchemaInterface::class)->getMock();
-        $schemaMock->method('read')->willReturn(new stdClass);
+        $schemaMock->method('read')->willReturn(new stdClass());
         $options = ['classArgs' => [$schemaMock]];
 
         $result = ClassFactory::create(ConfigType::MIGRATION(), ClassType::PARSER(), $options);

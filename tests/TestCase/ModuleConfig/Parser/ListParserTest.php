@@ -16,7 +16,7 @@ class ListParserTest extends TestCase
     {
         $schemaPath = implode(DIRECTORY_SEPARATOR, [
             Configure::read('ModuleConfig.schemaPath'),
-            'list.json'
+            'list.json',
         ]);
         $schema = new Schema($schemaPath);
 
