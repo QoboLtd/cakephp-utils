@@ -37,6 +37,7 @@ composer binary
 *.mo binary
 *.pdf binary
 *.phar binary
+*.ai binary
 
 # Web fonts are binary
 *.otf binary
