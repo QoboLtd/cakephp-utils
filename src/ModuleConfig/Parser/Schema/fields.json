@@ -114,6 +114,11 @@
                     "description": "Define PPI (US term), personal data (EU term) and sensitive data (EU term)",
                     "type": "boolean",
                     "default": false
+                },
+                "help": {
+                    "title": "Help tooltip",
+                    "description": "Add help tooltip next to the label of the field",
+                    "type": "string"
                 }
             },
             "additionalProperties": false
