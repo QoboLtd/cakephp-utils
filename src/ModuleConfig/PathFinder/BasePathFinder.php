@@ -56,9 +56,15 @@ abstract class BasePathFinder implements PathFinderInterface
      */
     public function find(string $module, string $path = '', bool $validate = true)
     {
-        $this->validateModule($module);
-
         $path = $this->getFilePath($path);
+
+        // Ignore non-distribution files
+        if (Configure::read('ModuleConfig.distFilesOnly') && !$this->isDistributionFilePath($path)) {
+            $distributionPath = $this->getDistributionFilePath($path);
+            return $this->find($module, $distributionPath, $validate);
+        }
+
+        $this->validateModule($module);
         $this->validatePath($path);
 
         $result = '';
