@@ -23,6 +23,7 @@ return [
             dirname(__DIR__),
             'src', 'ModuleConfig', 'Parser', 'Schema',
         ]),
+        'cacheConfig' => 'default',
         'classMapVersion' => 'V3',
         'classMap' => [
             'V3' => [
