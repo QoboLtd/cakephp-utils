@@ -61,6 +61,7 @@ abstract class BasePathFinder implements PathFinderInterface
         // Ignore non-distribution files
         if (Configure::read('ModuleConfig.distFilesOnly') && !$this->isDistributionFilePath($path)) {
             $distributionPath = $this->getDistributionFilePath($path);
+
             return $this->find($module, $distributionPath, $validate);
         }
 
