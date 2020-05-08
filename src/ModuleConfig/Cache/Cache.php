@@ -12,6 +12,7 @@
 namespace Qobo\Utils\ModuleConfig\Cache;
 
 use Cake\Cache\Cache as CakeCache;
+use Cake\Core\Configure;
 use InvalidArgumentException;
 use Qobo\Utils\ErrorAwareInterface;
 use Qobo\Utils\ErrorTrait;
@@ -27,11 +28,6 @@ use Qobo\Utils\ErrorTrait;
 class Cache implements ErrorAwareInterface
 {
     use ErrorTrait;
-
-    /**
-     * Name of default CakePHP cache configuration
-     */
-    const DEFAULT_CONFIG = 'default';
 
     /**
      * Name of the current cache instance
@@ -115,7 +111,7 @@ class Cache implements ErrorAwareInterface
     protected function setOptions(array $options = []): void
     {
         $this->options = $options;
-        $this->configName = empty($options['cacheConfig']) ? static::DEFAULT_CONFIG : (string)$options['cacheConfig'];
+        $this->configName = empty($options['cacheConfig']) ? (string)Configure::read('ModuleConfig.cacheConfig') : (string)$options['cacheConfig'];
         $this->skipCache = empty($this->options['cacheSkip']) ? false : (bool)$this->options['cacheSkip'];
     }
 
