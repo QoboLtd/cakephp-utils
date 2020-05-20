@@ -90,6 +90,14 @@ class Module implements ModuleInterface
     /**
      * {@inheritDoc}
      */
+    public function getMenus(): array
+    {
+        return $this->menus;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getMenu(string $name): array
     {
         if (!isset($this->menus[$name])) {

@@ -46,6 +46,13 @@ interface ModuleInterface
     public function getMenu(string $name): array;
 
     /**
+     * Returns all the module menus.
+     *
+     * @return mixed[]
+     */
+    public function getMenus(): array;
+
+    /**
      * Returns the full contents of the list or a subset specifiec by path.
      *
      * @param string $name List name.
