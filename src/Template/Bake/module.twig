@@ -17,9 +17,9 @@ use Qobo\Utils\Module\Module;
 
 final class {{ name }}Module extends Module
 {
-    protected $configData = {{ config|raw }};
+    protected $config = {{ config|raw }};
 
-    protected $migrationData = {{ migration|raw }};
+    protected $migration = {{ migration|raw }};
 
     protected $lists = {{ lists|raw }};
 
