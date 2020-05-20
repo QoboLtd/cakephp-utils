@@ -89,7 +89,7 @@ class ModuleTaskTest extends ConsoleIntegrationTestCase
     public function testMain(): void
     {
         $path = TESTS . 'data' . DS . 'Modules' . DS;
-        $this->exec('generate_modules module Foo -f -n "Qobo\Utils\Test\App\Module" --module-path=' . $path);
+        $this->exec('generate_modules module Foo -f --module-path=' . $path);
         $this->assertOutputContains('<success>');
         $this->assertFileExists(TESTS . 'App' . DS . 'Module' . DS . 'FooModule.php');
     }
