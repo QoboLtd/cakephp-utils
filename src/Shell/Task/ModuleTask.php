@@ -68,7 +68,10 @@ class ModuleTask extends SimpleBakeTask
      */
     public function main($name = null)
     {
-        Assert::string($name);
+        if (empty($name)) {
+            $this->abort('Missing the required `name` parameter.');
+        }
+
         $this->moduleName = $name;
         parent::main($name);
     }
