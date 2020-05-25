@@ -13,8 +13,8 @@ namespace Qobo\Utils\Module;
 
 use Cake\Core\App;
 use Cake\Core\ObjectRegistry;
-use InvalidArgumentException;
-use Webmozart\Assert\Assert;
+use Qobo\Utils\Module\Exception\InvalidClassException;
+use Qobo\Utils\Module\Exception\MissingModuleException;
 
 class ModuleRegistry extends ObjectRegistry
 {
@@ -76,7 +76,9 @@ class ModuleRegistry extends ObjectRegistry
         if ($module === null) {
             $module = self::instance()->load($moduleName, $config);
         }
-        Assert::isInstanceOf($module, ModuleInterface::class, (string)__d('Qobo/Utils', 'Module `{0}` is not an instance of `{1}`', $moduleName, ModuleInterface::class));
+        if (!($module instanceof ModuleInterface)) {
+            throw new InvalidClassException((string)__d('Qobo/Utils', 'Module `{0}` is not an instance of `{1}`', $moduleName, ModuleInterface::class));
+        }
 
         return $module;
     }
@@ -117,6 +119,6 @@ class ModuleRegistry extends ObjectRegistry
      */
     protected function _throwMissingClassError($class, $plugin)
     {
-        throw new InvalidArgumentException((string)__d('Qobo/Utils', 'Module `{0}` does not exist.', $class));
+        throw new MissingModuleException((string)__d('Qobo/Utils', 'Module `{0}` does not exist.', $class));
     }
 }
