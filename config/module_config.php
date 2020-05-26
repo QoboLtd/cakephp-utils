@@ -23,7 +23,9 @@ return [
             dirname(__DIR__),
             'src', 'ModuleConfig', 'Parser', 'Schema',
         ]),
+        'cacheConfig' => 'default',
         'classMapVersion' => 'V3',
+        'distFilesOnly' => false,
         'classMap' => [
             'V3' => [
                 (string)ConfigType::MIGRATION() => [

@@ -4,6 +4,7 @@ build/
 vendor/
 tmp/
 cghooks.lock
+tests/App/Module/
 
 composer.lock
 config/Migrations/schema-dump-default.lock

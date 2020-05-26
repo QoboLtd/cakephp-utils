@@ -1,6 +1,7 @@
 <?php
 namespace Qobo\Utils\Test\TestCase\ModuleConfig\Cache;
 
+use Cake\Core\Configure;
 use Cake\TestSuite\TestCase;
 use Qobo\Utils\ModuleConfig\Cache\Cache;
 
@@ -22,7 +23,7 @@ class CacheTest extends TestCase
 
     public function testGetConfig(): void
     {
-        $expected = Cache::DEFAULT_CONFIG;
+        $expected = Configure::read('ModuleConfig.cacheConfig');
         $cache = new Cache('test_cache');
         $result = $cache->getConfig();
         $this->assertEquals($expected, $result, "getConfig() returned a non-default config name: $result");

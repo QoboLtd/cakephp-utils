@@ -1,0 +1,31 @@
+{#
+/**
+ * Copyright (c) Qobo Ltd. (https://www.qobo.biz)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Qobo Ltd. (https://www.qobo.biz)
+ * @license       https://opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+<?php
+namespace {{ namespace|raw }}\Module;
+
+use Qobo\Utils\Module\Module;
+
+final class {{ name }}Module extends Module
+{
+    protected $config = {{ config|raw }};
+
+    protected $migration = {{ migration|raw }};
+
+    protected $lists = {{ lists|raw }};
+
+    protected $fields = {{ fields|raw }};
+
+    protected $menus = {{ menus|raw }};
+
+    protected $views = {{ views|raw }};
+}

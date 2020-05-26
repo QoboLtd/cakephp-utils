@@ -39,6 +39,7 @@
     <!-- Exclude patterns -->
     <exclude-pattern>config/Migrations/*</exclude-pattern>
     <exclude-pattern>config/Seeds/*</exclude-pattern>
+    <exclude-pattern>tests/App/Module/*</exclude-pattern>
     <exclude-pattern>webroot/plugins/*</exclude-pattern>
     <exclude-pattern>*\.min\.(css|js)</exclude-pattern>
 </ruleset>
