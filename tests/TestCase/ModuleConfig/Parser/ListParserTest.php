@@ -21,10 +21,7 @@ class ListParserTest extends TestCase
         $schema = new Schema($schemaPath);
 
         $this->parser = new ListParser($schema);
-        $this->dataDir = TESTS . 'data' . DS . 'Modules';
-
-        Configure::write('CsvMigrations.modules.path', $this->dataDir);
-        Configure::write('ModuleConfig.classMapVersion', 'V2');
+        $this->dataDir = Configure::read('CsvMigrations.modules.path');
     }
 
     public function tearDown()

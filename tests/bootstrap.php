@@ -46,6 +46,7 @@ require ROOT . '/vendor/autoload.php';
 require CORE_PATH . 'config/bootstrap.php';
 
 Configure::write('App', [
+    'encoding' => 'UTF-8',
     'namespace' => 'Qobo\\' . $pluginName . '\Test\App',
     'paths' => [
         'templates' => [
@@ -53,6 +54,9 @@ Configure::write('App', [
         ],
     ],
 ]);
+Configure::write('CsvMigrations.modules.path', TESTS . 'data' . DS . 'Modules' . DS);
+Configure::write('ModuleConfig.classMapVersion', 'V3');
+
 Configure::write('debug', true);
 
 $TMP = new Folder(TMP);
