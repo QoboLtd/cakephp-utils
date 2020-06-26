@@ -28,6 +28,10 @@
         {
             "type": "git",
             "url": "https://github.com/QoboLtd/cakephp-file-storage.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:QoboLtd/Imagine.git"
         }
     ],
     "require": {
@@ -42,6 +46,7 @@
         "cakephp/migrations": "^1.7",
         "friendsofcake/crud": "^5.4",
         "fzaninotto/faker": "^1.0",
+        "imagine/imagine": "v0.6.x-dev",
         "josegonzalez/dotenv": "^3.2",
         "justinrainbow/json-schema": "^5.0",
         "league/csv": "^8.1",
