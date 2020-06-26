@@ -58,6 +58,11 @@
                     "description": "Target for link value URL (_blank, _self, _parent, _top, framename)",
                     "type": "string"
                 },
+                "limit": {
+                    "title": "Limit of field entity outputs",
+                    "description": "Used for aggregate fields, like file uploads",
+                    "type": "integer"
+                },
                 "translatable": {
                     "title": "Translatable button",
                     "description": "Allow Render translatable button",
