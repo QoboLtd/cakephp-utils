@@ -142,10 +142,10 @@ class ModuleConfigTest extends TestCase
      * @param string $description Options description
      * @param mixed[] $options Array of options
      */
-    public function testParseInvalidException(string $description, array $options): void
+    public function testFindInvalidException(string $description, array $options): void
     {
-        $mc = new ModuleConfig(ConfigType::LISTS(), 'Foo', 'invalid_list.csv', $options);
-        $parser = $mc->parse();
+        $mc = new ModuleConfig(ConfigType::LISTS(), 'Foo', 'invalid_list', $options);
+        $parser = $mc->find();
     }
 
     /**
