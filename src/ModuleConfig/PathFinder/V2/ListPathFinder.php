@@ -11,28 +11,18 @@
  */
 namespace Qobo\Utils\ModuleConfig\PathFinder\V2;
 
-use InvalidArgumentException;
 use Qobo\Utils\ModuleConfig\PathFinder\BasePathFinder;
 
 /**
  * ListPathFinder Class
  *
  * This path finder is here to assist with finding
- * the paths to the list files.  $path
- * parameter is required, but $module is optional.
+ * the paths to the list files.
  *
  * @author Leonid Mamchenkov <l.mamchenkov@qobo.biz>
  */
 class ListPathFinder extends BasePathFinder
 {
-    /**
-     * Default module
-     *
-     * A fallback module to use when the list is not
-     * found in the current module.
-     */
-    const DEFAULT_MODULE = 'Common';
-
     /**
      * @var string $extension Default file extension
      */
@@ -51,9 +41,6 @@ class ListPathFinder extends BasePathFinder
      * given without the file extension, attach one to make it
      * easier to find.
      *
-     * If the module is empty, or list is not found in the module,
-     * we fallback on the Common module.
-     *
      * @param string $module Module to look for files in
      * @param string $path   Path to look for
      * @param bool   $validate Validate existence of the result
@@ -61,30 +48,9 @@ class ListPathFinder extends BasePathFinder
      */
     public function find(string $module, string $path = '', bool $validate = true)
     {
-        if (empty($module)) {
-            $this->warnings[] = "Module not specified.  Assuming: " . self::DEFAULT_MODULE;
-            $module = self::DEFAULT_MODULE;
-        }
-
         $this->validatePath($path);
         $path = $this->addFileExtension($path);
 
-        $result = null;
-        try {
-            $result = parent::find($module, $path, true);
-        } catch (InvalidArgumentException $e) {
-            if ($module == self::DEFAULT_MODULE) {
-                $this->fail($e);
-            }
-        }
-
-        // Module list was not found so we are falling back to the default module
-        // We ignore distribution files so that we will attempt to load custom file as well
-        if (!$this->isDistributionFilePath($path) && ($result === null) && ($module <> self::DEFAULT_MODULE)) {
-            $this->warnings[] = "Module list not found.  Falling back on module " . self::DEFAULT_MODULE;
-            $result = parent::find(self::DEFAULT_MODULE, $path, true);
-        }
-
-        return $result;
+        return parent::find($module, $path, true);
     }
 }
