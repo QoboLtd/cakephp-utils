@@ -82,6 +82,30 @@
             "additionalProperties": false,
             "required": ["form", "field", "action"]
         },
+        "parentItem": {
+        	"title": "Parent Redirect definition",
+            "description": "Single Parent Redirect Definition",
+            "type": "object",
+            "properties": {
+                  "module": {
+                      "title": "Module name",
+                      "description": "Name fo the parent module",
+                      "$ref": "#/definitions/moduleName"
+                  },
+                  "relation": {
+                      "title": "Relation field",
+                      "description": "Field to use for parent relation",
+                      "$ref": "#/definitions/fieldName"
+                  },
+                  "redirect": {
+                      "title": "Redirect behavior configuration",
+                      "description": "Definition of where to redirect upon creation/modification/deletion of module records",
+                      "type": "string",
+                      "enum": ["self", "parent"]
+                  }
+            },
+            "required": ["module"]
+        },
         "conversionItem": {
             "title": "Conversion item",
             "description": "Single conversion item",
@@ -405,28 +429,10 @@
             "required": ["modules"]
         },
         "parent": {
-            "title": "Module parent configuration",
-            "description": "Definition of a module's parent",
-            "type": "object",
-            "properties": {
-                "module": {
-                    "title": "Module name",
-                    "description": "Name fo the parent module",
-                    "$ref": "#/definitions/moduleName"
-                },
-                "relation": {
-                    "title": "Relation field",
-                    "description": "Field to use for parent relation, if there are mutliple relations with module which is parent",
-                    "$ref": "#/definitions/fieldName"
-                },
-                "redirect": {
-                    "title": "Redirect behavior configuration",
-                    "description": "Definition of where to redirect upon creation/modification/deletion of module records",
-                    "type": "string",
-                    "enum": ["self", "parent", "referer"]
-                }
-            },
-            "required": ["module"]
+            "title": "Module parents configuration for parent redirects",
+            "description": "Array of objects identifying redirect options for aggregate module",
+            "type": "array",
+            "items": { "$ref": "#/definitions/parentItem" }
         },
         "associations": {
             "title": "Module associations configuration",
