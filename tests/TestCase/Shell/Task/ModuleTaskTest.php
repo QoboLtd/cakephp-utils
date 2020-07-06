@@ -8,6 +8,7 @@ use Qobo\Utils\Module\ModuleRegistry;
 use Qobo\Utils\Shell\Task\ModuleTask;
 use Qobo\Utils\Test\App\Module\FooModule;
 use Qobo\Utils\Test\App\SampleModuleDecorator;
+use Webmozart\Assert\Assert;
 
 /**
  * Qobo\Utils\Shell\Task\ModuleTask Test Case
@@ -113,10 +114,10 @@ class ModuleTaskTest extends ConsoleIntegrationTestCase
     protected function assumeDecoratorConfigured(): void
     {
         $decorators = Configure::consume('Module.decorators');
-
         if (empty($decorators)) {
             $decorators = [];
         }
+        Assert::isArray($decorators);
         if (!in_array(SampleModuleDecorator::class, $decorators)) {
             $decorators[] = SampleModuleDecorator::class;
         }
