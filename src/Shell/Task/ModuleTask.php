@@ -12,6 +12,7 @@
 namespace Qobo\Utils\Shell\Task;
 
 use Bake\Shell\Task\SimpleBakeTask;
+use Cake\Core\Configure;
 use Cake\Filesystem\Folder;
 use Qobo\Utils\ModuleConfig\ConfigType;
 use Qobo\Utils\ModuleConfig\ModuleConfig;
@@ -90,14 +91,35 @@ class ModuleTask extends SimpleBakeTask
         $menus = (new ModuleConfig(ConfigType::MENUS(), $this->moduleName, null, $this->moduleConfigOptions))->parseToArray();
         $views = $this->getModuleViews();
 
-        $config = var_export($config, true);
-        $migration = var_export($migration, true);
-        $lists = var_export($lists, true);
-        $fields = var_export($fields, true);
-        $menus = var_export($menus, true);
-        $views = var_export($views, true);
+        $data = compact('config', 'migration', 'lists', 'fields', 'menus', 'views');
+        $data = $this->runDecorators($data);
 
-        return parent::templateData() + compact('config', 'migration', 'lists', 'fields', 'menus', 'views');
+        foreach ($data as $key => $value) {
+            $data[$key] = var_export($value, true);
+        }
+
+        return parent::templateData() + $data;
+    }
+
+    /**
+     * Run decorator classes before generating a module class file.
+     *
+     * Allows to modify the array data before its written into the file system.
+     *
+     * @param mixed[] $data Module class variables
+     * @return mixed[]
+     */
+    protected function runDecorators(array $data): array
+    {
+        $decorators = Configure::read('Module.decorators', []);
+        foreach ($decorators as $className) {
+            Assert::classExists($className);
+            $decorator = new $className();
+            $data = $decorator($data);
+            Assert::isArray($data, __d('Qobo/Utils', 'The decorator {0} did not return an array.', $className));
+        }
+
+        return $data;
     }
 
     /**
