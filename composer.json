@@ -24,29 +24,18 @@
             "php": "7.1"
         }
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/QoboLtd/cakephp-file-storage.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/QoboLtd/Imagine.git"
-        }
-    ],
     "require": {
         "admad/cakephp-jwt-auth": "^2.0",
         "admad/cakephp-sequence": "^2.2",
         "alt3/cakephp-swagger": "^2.0",
         "arvenil/ninja-mutex": "^0.6",
-        "burzum/cakephp-file-storage": "dev-branch-2.0",
-        "burzum/cakephp-imagine-plugin": "dev-master#d21baf7378271d536982c8c0867fab3dcfa24cc8",
+        "burzum/cakephp-file-storage": "^2.0",
+        "burzum/cakephp-imagine-plugin": "^2.0",
         "cakedc/users": "^8.0",
-        "cakephp/cakephp": "^3.5 <3.7",
-        "cakephp/migrations": "^1.7",
+        "cakephp/cakephp": "^3.8",
+        "cakephp/migrations": "^2.0",
         "friendsofcake/crud": "^5.4",
         "fzaninotto/faker": "^1.0",
-        "imagine/imagine": "v0.6.x-dev",
         "josegonzalez/dotenv": "^3.2",
         "justinrainbow/json-schema": "^5.0",
         "league/csv": "^8.1",
