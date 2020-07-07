@@ -38,7 +38,7 @@
         "fzaninotto/faker": "^1.0",
         "josegonzalez/dotenv": "^3.2",
         "justinrainbow/json-schema": "^5.0",
-        "league/csv": "^8.1",
+        "league/csv": "^9.5",
         "lorenzo/audit-stash": "^2.0",
         "maiconpinto/cakephp-adminlte-theme": "^1.0",
         "mobiledetect/mobiledetectlib": "2.*",
