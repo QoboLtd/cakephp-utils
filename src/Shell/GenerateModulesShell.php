@@ -45,6 +45,9 @@ class GenerateModulesShell extends Shell
             'short' => 'f',
             'boolean' => true,
             'help' => 'Force overwriting existing files without prompting.',
+        ])->addArgument('modules', [
+            'required' => false,
+            'help' => 'List of modules to generate',
         ]);
 
         return $parser;
@@ -81,6 +84,13 @@ class GenerateModulesShell extends Shell
         Assert::isArray($result);
         Assert::notEmpty($result[0]); // hold the directories
         Assert::isArray($result[0]);
+
+        $list = !isset($this->args[0]) ? false : explode(",", $this->args[0]);
+        if ($list) {
+            $result[0] = array_filter($result[0], function ($k) use ($list) {
+                return in_array($k, $list);
+            });
+        }
 
         return $result[0];
     }
