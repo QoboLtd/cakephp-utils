@@ -115,7 +115,7 @@ class ModuleTask extends SimpleBakeTask
         foreach ($decorators as $className) {
             Assert::classExists($className);
             $decorator = new $className();
-            $data = $decorator($data);
+            $data = $decorator($this->moduleName, $data);
             Assert::isArray($data, (string)__d('Qobo/Utils', 'The decorator {0} did not return an array.', $className));
         }
 
