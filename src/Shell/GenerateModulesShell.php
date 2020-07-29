@@ -45,6 +45,13 @@ class GenerateModulesShell extends Shell
             'short' => 'f',
             'boolean' => true,
             'help' => 'Force overwriting existing files without prompting.',
+        ])->addOption('module-path', [
+            'default' => CONFIG . 'Modules' . DS,
+            'help' => 'Override the application path to folder with module json files, which defaults to `config/Modules/`',
+        ])->addOption('skip-decorators', [
+            'boolean' => true,
+            'default' => false,
+            'help' => 'Skip running module decorators',
         ]);
 
         return $parser;
@@ -62,7 +69,19 @@ class GenerateModulesShell extends Shell
         foreach ($modules as $module) {
             $this->info(sprintf('Generate module %s', $module));
 
-            $this->Module->main($module);
+            $command = ['generate_modules', 'module', $module];
+            if (!empty($this->param('module-path'))) {
+                $command[] = '--module-path';
+                $command[] = $this->param('module-path');
+            }
+            if ((bool)$this->param('force') === true) {
+                $command[] = '-f';
+            }
+            if ((bool)$this->param('skip-decorators') === true) {
+                $command[] = '--skip-decorators';
+            }
+
+            $this->dispatchShell(compact('command'));
         }
 
         return true;
