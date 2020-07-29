@@ -68,7 +68,7 @@ class GenerateModulesShell extends Shell
 
         foreach ($modules as $module) {
             $this->info(sprintf('Generate module %s', $module));
-            
+
             $command = ['generate_modules', 'module', $module];
             if (!empty($this->param('module-path'))) {
                 $command[] = '--module-path';
