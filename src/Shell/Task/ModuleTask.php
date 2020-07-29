@@ -92,7 +92,10 @@ class ModuleTask extends SimpleBakeTask
         $views = $this->getModuleViews();
 
         $data = compact('config', 'migration', 'lists', 'fields', 'menus', 'views');
-        $data = $this->runDecorators($data);
+        $skipDecorators = $this->param('skip-decorators');
+        if (!$skipDecorators) {
+            $data = $this->runDecorators($data);
+        }
 
         foreach ($data as $key => $value) {
             $data[$key] = var_export($value, true);
@@ -212,6 +215,11 @@ class ModuleTask extends SimpleBakeTask
         $parser->addOption('module-path', [
             'default' => CONFIG . 'Modules' . DS,
             'help' => 'Override the application path to folder with module json files, which defaults to `config/Modules/`',
+        ]);
+        $parser->addOption('skip-decorators', [
+            'boolean' => true,
+            'default' => false,
+            'help' => 'Skip running module decorators',
         ]);
 
         return $parser;
