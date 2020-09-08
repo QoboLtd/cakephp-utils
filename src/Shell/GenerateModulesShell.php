@@ -66,25 +66,64 @@ class GenerateModulesShell extends Shell
     {
         $modules = $this->getModules();
 
+        // Generate the classes without apply the decorators first
+        // since, some of the decorators may depend on other Module classes
         foreach ($modules as $module) {
-            $this->info(sprintf('Generate module %s', $module));
+            $this->info(sprintf('Generating classes for module %s', $module), 0);
+            $this->generateModule(
+                $module,
+                (string)$this->param('module-path'),
+                (bool)$this->param('force'),
+                true
+            );
+            $this->hr();
+        }
 
-            $command = ['generate_modules', 'module', $module];
-            if (!empty($this->param('module-path'))) {
-                $command[] = '--module-path';
-                $command[] = $this->param('module-path');
-            }
-            if ((bool)$this->param('force') === true) {
-                $command[] = '-f';
-            }
-            if ((bool)$this->param('skip-decorators') === true) {
-                $command[] = '--skip-decorators';
-            }
+        if ((bool)$this->param('skip-decorators')) {
+            return true;
+        }
 
-            $this->dispatchShell(compact('command'));
+        // Apply decorators if necessary
+        foreach ($modules as $module) {
+            $this->info(sprintf('Applying decorators for module %s', $module), 0);
+            $this->generateModule(
+                $module,
+                (string)$this->param('module-path'),
+                (bool)$this->param('force'),
+                false
+            );
+            $this->hr();
         }
 
         return true;
+    }
+
+    /**
+     * Triggers the module task to generate the class file, for the specified module
+     *
+     * @param string $module Module's name
+     * @param string $modulePath Override the application path to folder with Module JSON files
+     * @param bool $force Force overwriting existing files without prompting
+     * @param bool $skipDecorators Skip running module decorators
+     */
+    private function generateModule(string $module, string $modulePath, bool $force, bool $skipDecorators): void
+    {
+        $command = ['generate_modules', 'module', $module];
+        if (!empty($modulePath)) {
+            $command[] = '--module-path';
+            $command[] = $modulePath;
+        }
+
+        if ($force) {
+            $command[] = '-f';
+        }
+
+        if ($skipDecorators) {
+            $skipDecorators = true;
+            $command[] = '--skip-decorators';
+        }
+
+        $this->dispatchShell(compact('command'));
     }
 
     /**
