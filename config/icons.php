@@ -7,5 +7,6 @@ return [
         'pattern' => '/\.fa-([\w|-]+)/',
         'default' => 'cube',
         'ignored' => ['lg', '2x', '3x', '4x', '5x'],
+        'prefix' => 'fa fa-',
     ],
 ];
