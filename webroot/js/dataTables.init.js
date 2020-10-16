@@ -137,7 +137,7 @@ DataTablesInit.prototype = {
                 }
 
                 $(this).prepend(
-                    '<div class="key ' + specialClass + '"> ' + label + '</div>' + emptyVal;
+                    '<div class="key ' + specialClass + '"> ' + label + '</div>' + emptyVal
                 );
             });
         };
