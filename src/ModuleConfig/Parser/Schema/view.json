@@ -9,8 +9,7 @@
                 "type": "string"
             },
             "uniqueItems": true,
-            "minItems": 1,
-            "maxItems": 13
+            "minItems": 1
         },
         "fieldLabel": {
             "title": "Field Label",
