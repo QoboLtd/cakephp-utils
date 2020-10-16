@@ -129,15 +129,15 @@ DataTablesInit.prototype = {
                 }
 
                 if ($html.trim() == "") {
-                    emptyVal += ` < div class = "val ${specialClass} " > ${selectionVal} < / div > `;
+                    emptyVal += '<div class ="val ' + selectionVal  + '"></div>';
                 } else {
                     $(this)
                     .contents()
-                    .wrapAll(` < div class = "val ${assignedClass}" > < / div > `);
+                    .wrapAll('<div class="val ' + assignedClass + '"></div>');
                 }
 
                 $(this).prepend(
-                    ` < div class = "key ${specialClass}" > ${label} < / div > ${emptyVal}`
+                    '<div class="key ' + specialClass + '"> ' + label +'</div>' + emptyVal
                 );
             });
         };
