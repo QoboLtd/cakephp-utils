@@ -129,7 +129,7 @@ DataTablesInit.prototype = {
                 }
 
                 if ($html.trim() == "") {
-                    emptyVal += '<div class ="val ' + selectionVal  + '"></div>';
+                    emptyVal += '<div class ="val ' + selectionVal + '"></div>';
                 } else {
                     $(this)
                     .contents()
