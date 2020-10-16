@@ -22,15 +22,36 @@ DataTablesInit.prototype = {
         var that = this;
 
         var settings = {
+            sDom:
+            '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"p>>>',
+            oLanguage: {
+            oPaginate: {
+                sFirst: "First page", // This is the link to the first page
+                sPrevious:
+                "<i aria-hidden='true' class='qobrix-icon qobo-angle-left font-size-10'></i>", // This is the link to the previous page
+                sNext:
+                "<i aria-hidden='true' class='qobrix-icon qobo-angle-right font-size-10'></i>", // This is the link to the next page
+                sLast: "Last page", // This is the link to the last page
+            },
+            },
             searching: false,
             lengthMenu: [5, 10, 25, 50, 100],
             pageLength: 10,
             language: {
-                processing: '<i class="fa fa-refresh fa-spin fa-fw"></i> Processing...'
+                processing:
+                  '<i class="qobrix-icon qobo-refresh fa-spin fa-fw"></i> Processing...',
+                sLengthMenu: "_MENU_",
             },
             columnDefs: [
                 {targets: [-1], orderable: false}
             ],
+            fnDrawCallback: function (oSettings) {
+            if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+                    $(oSettings.nTableWrapper).find(".dataTables_paginate").hide();
+                } else {
+                    $(oSettings.nTableWrapper).find(".dataTables_paginate").show();
+                }
+            }
         };
 
         settings.order = [ this.options.order ? this.options.order : [0, 'asc'] ];
@@ -83,11 +104,44 @@ DataTablesInit.prototype = {
         }
 
         // batch specific options
-        if (this.options.batch) {
-            settings.createdRow = function ( row, data, index ) {
+        var _self = this;
+        settings.createdRow = function ( row, data, index ) {
+            if (_self.options.batch) {
                 $(row).attr('data-id', data[0]);
                 $('td', row).eq(0).text('');
-            };
+            }
+            const $topRow = $(this).find(">thead>tr,>tr").eq(0);
+            $.each($("td", row), function (colIndex) {
+                const $html = $(this).html();
+                const label = $topRow.find(">td,>th").eq(colIndex).html().trim();
+                let emptyVal = "";
+                let assignedClass = "";
+                let specialClass = "";
+                let selectionVal = "--";
+
+                if (colIndex === 0) {
+                specialClass = "key-select";
+                selectionVal = "Select";
+                }
+
+                if (label.toLowerCase().replace(/\s+/g, "_") === "assigned_to") {
+                assignedClass = "center-image";
+                }
+
+                if ($html.trim() == "") {
+                emptyVal += `<div class="val ${specialClass} ">${selectionVal}</div>`;
+                } else {
+                $(this)
+                    .contents()
+                    .wrapAll(`<div class="val ${assignedClass}"></div>`);
+                }
+
+                $(this).prepend(
+                `<div class="key ${specialClass}">${label}</div>${emptyVal}`
+                );
+            });
+        };
+        if (_self.options.batch) {
             settings.select = {
                 style: 'multi',
                 selector: 'td:first-child'
