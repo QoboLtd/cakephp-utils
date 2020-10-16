@@ -57,7 +57,6 @@
             "items": {
                 "type": "array",
                 "minItems": 1,
-                "maxItems": 13,
                 "items": [ { "$ref": "#/definitions/fieldLabel" } ],
                 "additionalItems": {
                     "anyOf": [
