@@ -25,14 +25,14 @@ DataTablesInit.prototype = {
             sDom:
             '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"p>>>',
             oLanguage: {
-            oPaginate: {
-                sFirst: "First page", // This is the link to the first page
-                sPrevious:
-                "<i aria-hidden='true' class='qobrix-icon qobo-angle-left font-size-10'></i>", // This is the link to the previous page
-                sNext:
-                "<i aria-hidden='true' class='qobrix-icon qobo-angle-right font-size-10'></i>", // This is the link to the next page
-                sLast: "Last page", // This is the link to the last page
-            },
+                oPaginate: {
+                    sFirst: "First page", // This is the link to the first page
+                    sPrevious:
+                    "<i aria-hidden='true' class='qobrix-icon qobo-angle-left font-size-10'></i>", // This is the link to the previous page
+                    sNext:
+                    "<i aria-hidden='true' class='qobrix-icon qobo-angle-right font-size-10'></i>", // This is the link to the next page
+                    sLast: "Last page", // This is the link to the last page
+                },
             },
             searching: false,
             lengthMenu: [5, 10, 25, 50, 100],
@@ -46,7 +46,7 @@ DataTablesInit.prototype = {
                 {targets: [-1], orderable: false}
             ],
             fnDrawCallback: function (oSettings) {
-            if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+                if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
                     $(oSettings.nTableWrapper).find(".dataTables_paginate").hide();
                 } else {
                     $(oSettings.nTableWrapper).find(".dataTables_paginate").show();
@@ -120,24 +120,24 @@ DataTablesInit.prototype = {
                 let selectionVal = "--";
 
                 if (colIndex === 0) {
-                specialClass = "key-select";
-                selectionVal = "Select";
+                    specialClass = "key-select";
+                    selectionVal = "Select";
                 }
 
                 if (label.toLowerCase().replace(/\s+/g, "_") === "assigned_to") {
-                assignedClass = "center-image";
+                    assignedClass = "center-image";
                 }
 
                 if ($html.trim() == "") {
-                emptyVal += `<div class="val ${specialClass} ">${selectionVal}</div>`;
+                    emptyVal += ` < div class = "val ${specialClass} " > ${selectionVal} < / div > `;
                 } else {
-                $(this)
+                    $(this)
                     .contents()
-                    .wrapAll(`<div class="val ${assignedClass}"></div>`);
+                    .wrapAll(` < div class = "val ${assignedClass}" > < / div > `);
                 }
 
                 $(this).prepend(
-                `<div class="key ${specialClass}">${label}</div>${emptyVal}`
+                    ` < div class = "key ${specialClass}" > ${label} < / div > ${emptyVal}`
                 );
             });
         };
