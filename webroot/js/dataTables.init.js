@@ -126,13 +126,13 @@ DataTablesInit.prototype = {
                 
                 var trimmedLabel = label.toLowerCase().replace(/\s+/g, "_");
                 if (trimmedLabel === "assigned_to" || trimmedLabel === "country") {
-                  assignedClass = "center-image";
+                    assignedClass = "center-image";
                 } else if (trimmedLabel === "featured_photo") {
-                  $(this).find("a img").addClass("lightbox-image-source");
-                  assignedClass = "no-overflow-img";
+                    $(this).find("a img").addClass("lightbox-image-source");
+                    assignedClass = "no-overflow-img";
                 } else if (trimmedLabel === "files") {
-                  $(this).find("a img").addClass("lightbox-image-source");
-                  assignedClass = "no-overflow-img file-image";
+                    $(this).find("a img").addClass("lightbox-image-source");
+                    assignedClass = "no-overflow-img file-image";
                 }
 
                 if ($html.trim() == "") {
