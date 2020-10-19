@@ -110,22 +110,29 @@ DataTablesInit.prototype = {
                 $(row).attr('data-id', data[0]);
                 $('td', row).eq(0).text('');
             }
-            const $topRow = $(this).find(">thead>tr,>tr").eq(0);
+            var $topRow = $(this).find(">thead>tr,>tr").eq(0);
             $.each($("td", row), function (colIndex) {
-                const $html = $(this).html();
-                const label = $topRow.find(">td,>th").eq(colIndex).html().trim();
-                let emptyVal = "";
-                let assignedClass = "";
-                let specialClass = "";
-                let selectionVal = "--";
+                var $html = $(this).html();
+                var label = $topRow.find(">td,>th").eq(colIndex).html().trim();
+                var emptyVal = "";
+                var assignedClass = "";
+                var specialClass = "";
+                var selectionVal = "--";
 
                 if (colIndex === 0) {
                     specialClass = "key-select";
                     selectionVal = "Select";
                 }
-
-                if (label.toLowerCase().replace(/\s+/g, "_") === "assigned_to") {
-                    assignedClass = "center-image";
+                
+                var trimmedLabel = label.toLowerCase().replace(/\s+/g, "_");
+                if (trimmedLabel === "assigned_to" || trimmedLabel === "country") {
+                  assignedClass = "center-image";
+                } else if (trimmedLabel === "featured_photo") {
+                  $(this).find("a img").addClass("lightbox-image-source");
+                  assignedClass = "no-overflow-img";
+                } else if (trimmedLabel === "files") {
+                  $(this).find("a img").addClass("lightbox-image-source");
+                  assignedClass = "no-overflow-img file-image";
                 }
 
                 if ($html.trim() == "") {
