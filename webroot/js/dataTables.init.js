@@ -123,7 +123,6 @@ DataTablesInit.prototype = {
                     specialClass = "key-select";
                     selectionVal = "Select";
                 }
-                
                 var trimmedLabel = label.toLowerCase().replace(/\s+/g, "_");
                 if (trimmedLabel === "assigned_to" || trimmedLabel === "country") {
                     assignedClass = "center-image";
