@@ -27,7 +27,6 @@
     "require": {
         "admad/cakephp-jwt-auth": "^2.0",
         "admad/cakephp-sequence": "^2.2",
-        "alt3/cakephp-swagger": "^2.0",
         "arvenil/ninja-mutex": "^0.6",
         "burzum/cakephp-file-storage": "^2.0",
         "burzum/cakephp-imagine-plugin": "^2.0",
