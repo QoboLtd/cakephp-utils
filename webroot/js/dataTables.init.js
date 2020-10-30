@@ -1,8 +1,7 @@
 /**
  * DataTables initialiser Logic.
  */
-function DataTablesInit(options)
-{
+function DataTablesInit(options) {
     this.options = options;
 
     var table = this.dataTable();
@@ -23,27 +22,28 @@ DataTablesInit.prototype = {
 
         var settings = {
             sDom:
-            '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"p>>>',
+                '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row no-gutters view-pager"<"col-sm-12 col-md-6"<"text-left"i>><"col-sm-12 col-md-6"<"text-right"p>>>',
             oLanguage: {
                 oPaginate: {
                     sFirst: "First page", // This is the link to the first page
                     sPrevious:
-                    "<i aria-hidden='true' class='qobrix-icon qobo-angle-left font-size-10'></i>", // This is the link to the previous page
+                        "<i aria-hidden='true' class='qobrix-icon qobo-angle-left font-size-10'></i>", // This is the link to the previous page
                     sNext:
-                    "<i aria-hidden='true' class='qobrix-icon qobo-angle-right font-size-10'></i>", // This is the link to the next page
+                        "<i aria-hidden='true' class='qobrix-icon qobo-angle-right font-size-10'></i>", // This is the link to the next page
                     sLast: "Last page", // This is the link to the last page
                 },
             },
             searching: false,
             lengthMenu: [5, 10, 25, 50, 100],
-            pageLength: 10,
+            paging: true,
+            pageLength: 25,
             language: {
                 processing:
-                  '<i class="qobrix-icon qobo-refresh fa-spin fa-fw"></i> Processing...',
+                    '<i class="qobrix-icon qobo-refresh fa-spin fa-fw"></i> Processing...',
                 sLengthMenu: "_MENU_",
             },
             columnDefs: [
-                {targets: [-1], orderable: false}
+                { targets: [-1], orderable: false }
             ],
             fnDrawCallback: function (oSettings) {
                 if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
@@ -54,7 +54,7 @@ DataTablesInit.prototype = {
             }
         };
 
-        settings.order = [ this.options.order ? this.options.order : [0, 'asc'] ];
+        settings.order = [this.options.order ? this.options.order : [0, 'asc']];
 
         // ajax specific options
         if (this.options.ajax) {
@@ -105,19 +105,25 @@ DataTablesInit.prototype = {
 
         // batch specific options
         var _self = this;
-        settings.createdRow = function ( row, data, index ) {
+        settings.createdRow = function (row, data, index) {
             if (_self.options.batch) {
                 $(row).attr('data-id', data[0]);
                 $('td', row).eq(0).text('');
             }
-            const $topRow = $(this).find(">thead>tr,>tr").eq(0);
+            var dataVal = $(row).find('.action_area_dropdown a').attr('data-view-id');
+
+            if (dataVal) {
+                $(row).attr("data-id", dataVal);
+                $(row).addClass('remove-view-btn');
+            }
+            var $topRow = $(this).find(">thead>tr,>tr").eq(0);
             $.each($("td", row), function (colIndex) {
-                const $html = $(this).html();
-                const label = $topRow.find(">td,>th").eq(colIndex).html().trim();
-                let emptyVal = "";
-                let assignedClass = "";
-                let specialClass = "";
-                let selectionVal = "--";
+                var $html = $(this).html();
+                var label = $topRow.find(">td,>th").eq(colIndex).html().trim();
+                var emptyVal = "";
+                var assignedClass = "";
+                var specialClass = "";
+                var selectionVal = "--";
 
                 if (colIndex === 0) {
                     specialClass = "key-select";
@@ -132,8 +138,8 @@ DataTablesInit.prototype = {
                     emptyVal += '<div class ="val ' + selectionVal + '"></div>';
                 } else {
                     $(this)
-                    .contents()
-                    .wrapAll('<div class="val ' + assignedClass + '"></div>');
+                        .contents()
+                        .wrapAll('<div class="val ' + assignedClass + '"></div>');
                 }
 
                 $(this).prepend(
@@ -148,7 +154,7 @@ DataTablesInit.prototype = {
             };
 
             settings.columnDefs[0].targets.push(0);
-            settings.columnDefs.push({targets: [0], className: 'select-checkbox'});
+            settings.columnDefs.push({ targets: [0], className: 'select-checkbox' });
         }
 
         // state specific options
@@ -164,7 +170,44 @@ DataTablesInit.prototype = {
 
         var table = $(this.options.table_id).DataTable(settings);
 
+        table.on("click", 'tbody tr[role="row"]', function (event) {
+            var classChecker = _self.checkIfHasClass(event.target.className);
+            if (typeof event.target.href !== "undefined" || classChecker) {
+                return;
+            }
+            var id = $(this).data('id');
+            if (typeof id !== "undefined" && id != "") {
+                var hrefVal = $(this).find('.actions_area a[data-view-id]').attr('href');
+                window.location.href = encodeURI(hrefVal);
+            }
+        });
+
         return table;
+    },
+
+    checkIfHasClass: function (classname) {
+        if (typeof classname !== "string") {
+            return true;
+        }
+        var arr = classname.split(" ");
+        var found = false;
+        for (var x = 0; x < arr.length; x++) {
+            if (
+                arr[x] === "btn" ||
+                arr[x] === "key-select" ||
+                arr[x] === "table_actions" ||
+                arr[x] == "select-checkbox" ||
+                arr[x] == "fa" ||
+                arr[x] == "lightbox-image" ||
+                arr[x] == "lightbox-image-source" ||
+                arr[x] == "qobrix-icon" ||
+                arr[x] == "dropdown-menu"
+            ) {
+                found = true;
+                break;
+            }
+        }
+        return found;
     },
 
     dataFormatter: function (data) {
