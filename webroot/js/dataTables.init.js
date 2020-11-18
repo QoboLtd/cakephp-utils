@@ -177,7 +177,7 @@ DataTablesInit.prototype = {
             }
             var id = $(this).data('id');
             if (typeof id !== "undefined" && id != "") {
-                var hrefVal = $(this).find('.actions_area a[data-view-id]').attr('href');
+                var hrefVal = $(this).find('.action_area_dropdown a[data-view-id]').attr('href');
                 window.location.href = encodeURI(hrefVal);
             }
         });
