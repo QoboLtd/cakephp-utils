@@ -11,6 +11,7 @@
  */
 namespace Qobo\Utils\ModuleConfig\Parser;
 
+use Cake\Utility\Hash;
 use JsonSchema\Constraints\Constraint;
 use Qobo\Utils\Utility\Convert;
 
@@ -45,9 +46,13 @@ class ListParser extends Parser
         $result = parent::parse($path, $options);
         $data = Convert::objectToArray($result);
 
-        $data['items'] = $this->normalize($data['items']);
-
         $config = $this->getConfig();
+
+        if (isset($data['transaction'])) {
+            $data['items'] = $this->transaction($data, $config['transaction']);
+        }
+
+        $data['items'] = $this->normalize($data['items']);
 
         if ($config['filter']) {
             $data['items'] = $this->filter($data['items']);
@@ -137,5 +142,34 @@ class ListParser extends Parser
         }
 
         return $result;
+    }
+
+    /**
+     * Filter the list with the possible values from a parent key
+     *
+     * @param  mixed[] $data  List Array
+     * @param  string $value Current list value
+     * @return mixed[] filter array
+     */
+    protected function transaction(array $data, string $value): array
+    {
+        if (empty($value)) {
+            $initial = $data['transaction']['initial'];
+
+            return (array)Hash::extract($data['items'], '{n}[value=' . $initial . ']');
+        }
+
+        $list = [];
+        $to = (array)Hash::extract($data['transaction']['items'], '{n}[from=' . $value . '].to');
+
+        array_unshift($to, $value);
+        foreach ($to as $key) {
+            if (empty($key)) {
+                continue;
+            }
+            $list[] = (array)Hash::extract($data['items'], '{n}[value=' . $key . ']')[0];
+        }
+
+        return $list;
     }
 }

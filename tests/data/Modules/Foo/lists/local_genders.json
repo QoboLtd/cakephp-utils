@@ -36,6 +36,18 @@
                     "children": []
                 }
             ]
+        },
+        {
+            "value": "baz",
+            "label": "Baz",
+            "inactive": false,
+            "children": []
+        },
+        {
+            "value": "noway",
+            "label": "No way",
+            "inactive": false,
+            "children": []
         }
     ]
 }

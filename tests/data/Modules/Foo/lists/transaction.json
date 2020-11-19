@@ -1,0 +1,77 @@
+{
+  "items": [
+    {
+      "value": "new",
+      "label": "New",
+      "inactive": false,
+      "children": []
+    },
+    {
+      "value": "assigned",
+      "label": "Assigned",
+      "inactive": false,
+      "children": []
+    },
+    {
+      "value": "in_progress",
+      "label": "In Progress",
+      "inactive": false,
+      "children": []
+    },
+    {
+      "value": "converted",
+      "label": "Converted",
+      "inactive": false,
+      "children": []
+    },
+    {
+      "value": "asleep",
+      "label": "Asleep",
+      "inactive": false,
+      "children": []
+    },
+    {
+      "value": "dead",
+      "label": "Dead",
+      "inactive": false,
+      "children": []
+    }
+  ],
+  "transaction" : {
+    "initial": "new",
+    "items" : [
+      {
+        "from" : "new",
+        "to" : "assigned"
+      },
+      {
+        "from" : "assigned",
+        "to" : "in_progress"
+      },
+      {
+        "from" : "in_progress",
+        "to" : "converted"
+      },
+      {
+        "from" : "in_progress",
+        "to" : "asleep"
+      },
+      {
+        "from" : "in_progress",
+        "to" : "dead"
+      },
+      {
+        "from" : "converted",
+        "to" : ""
+      },
+      {
+        "from" : "asleep",
+        "to" : "in_progress"
+      },
+      {
+        "from" : "dead",
+        "to" : ""
+      }
+    ]
+  }
+}
