@@ -29,7 +29,7 @@
         "admad/cakephp-sequence": "^2.2",
         "arvenil/ninja-mutex": "^0.6",
         "burzum/cakephp-file-storage": "^2.0",
-        "burzum/cakephp-imagine-plugin": "^2.0",
+        "burzum/cakephp-imagine-plugin": "^3.0",
         "cakedc/users": "^8.0",
         "cakephp/cakephp": "^3.8",
         "cakephp/migrations": "^2.0",
