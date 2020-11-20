@@ -45,7 +45,7 @@
         "myclabs/php-enum": "^1.5",
         "pyrech/composer-changelogs": "^1.4",
         "riesenia/cakephp-duplicatable": "^3.0",
-        "rlanvin/php-rrule": "^1.6",
+        "rlanvin/php-rrule": "^2.2",
         "seld/jsonlint": "^1.7",
         "webmozart/assert": "^1.4"
     },
