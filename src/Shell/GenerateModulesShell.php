@@ -47,7 +47,10 @@ class GenerateModulesShell extends Shell
             'help' => 'Force overwriting existing files without prompting.',
         ])->addOption('module-path', [
             'default' => CONFIG . 'Modules' . DS,
-            'help' => 'Override the application path to folder with module json files, which defaults to `config/Modules/`',
+            'help' => 'Override the application path to folder with module json files.',
+        ])->addOption('output-path', [
+                'default' => '',
+                'help' => 'Override the module output path.',
         ])->addOption('skip-decorators', [
             'boolean' => true,
             'default' => false,
@@ -73,6 +76,7 @@ class GenerateModulesShell extends Shell
             $this->generateModule(
                 $module,
                 (string)$this->param('module-path'),
+                (string)$this->param('output-path'),
                 (bool)$this->param('force'),
                 true
             );
@@ -89,6 +93,7 @@ class GenerateModulesShell extends Shell
             $this->generateModule(
                 $module,
                 (string)$this->param('module-path'),
+                (string)$this->param('output-path'),
                 (bool)$this->param('force'),
                 false
             );
@@ -103,15 +108,21 @@ class GenerateModulesShell extends Shell
      *
      * @param string $module Module's name
      * @param string $modulePath Override the application path to folder with Module JSON files
+     * @param string $outputPath Override the output path to folder with Module JSON files
      * @param bool $force Force overwriting existing files without prompting
      * @param bool $skipDecorators Skip running module decorators
      */
-    private function generateModule(string $module, string $modulePath, bool $force, bool $skipDecorators): void
+    private function generateModule(string $module, string $modulePath, string $outputPath, bool $force, bool $skipDecorators): void
     {
         $command = ['generate_modules', 'module', $module];
         if (!empty($modulePath)) {
             $command[] = '--module-path';
             $command[] = $modulePath;
+        }
+
+        if (!empty($outputPath)) {
+            $command[] = '--output-path';
+            $command[] = $outputPath;
         }
 
         if ($force) {

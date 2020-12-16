@@ -196,6 +196,15 @@ class ModuleTask extends SimpleBakeTask
         return array_unique($filtered);
     }
 
+    public function getPath()
+    {
+        if (empty($this->params['output-path'])) {
+            return parent::getPath();
+        }
+
+        return ROOT . DS . $this->params['output-path'] . DS . $this->pathFragment;
+    }
+
     /**
      * {@inheritDoc}
      *
@@ -215,6 +224,10 @@ class ModuleTask extends SimpleBakeTask
         $parser->addOption('module-path', [
             'default' => CONFIG . 'Modules' . DS,
             'help' => 'Override the application path to folder with module json files, which defaults to `config/Modules/`',
+        ]);
+        $parser->addOption('output-path', [
+            'default' => '',
+            'help' => 'Override the output path to generate the modules, which defaults to `src/Modules/`',
         ]);
         $parser->addOption('skip-decorators', [
             'boolean' => true,
