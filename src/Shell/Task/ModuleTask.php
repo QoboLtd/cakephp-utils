@@ -197,7 +197,7 @@ class ModuleTask extends SimpleBakeTask
     }
 
     /**
-     * @inheritdoc
+     * {@inheritDoc}
      */
     public function getPath()
     {
