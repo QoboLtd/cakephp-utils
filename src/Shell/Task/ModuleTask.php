@@ -196,6 +196,9 @@ class ModuleTask extends SimpleBakeTask
         return array_unique($filtered);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getPath()
     {
         if (empty($this->params['output-path'])) {
