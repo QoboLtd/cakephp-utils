@@ -1,7 +1,8 @@
 /**
  * DataTables initialiser Logic.
  */
-function DataTablesInit(options) {
+function DataTablesInit(options)
+{
     this.options = options;
 
     var table = this.dataTable();
@@ -191,7 +192,8 @@ DataTablesInit.prototype = {
         }
         var arr = classname.split(" ");
         var found = false;
-        for (var x = 0; x < arr.length; x++) {
+        var arrLength = arr.length;
+        for (var x = 0; x < arrLength; x++) {
             if (
                 arr[x] === "btn" ||
                 arr[x] === "key-select" ||
@@ -207,6 +209,7 @@ DataTablesInit.prototype = {
                 break;
             }
         }
+
         return found;
     },
 
