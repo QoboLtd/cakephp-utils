@@ -124,6 +124,16 @@
                     "title": "Help tooltip",
                     "description": "Add help tooltip next to the label of the field",
                     "type": "string"
+                },
+                "filterFromField": {
+                    "title": "Filter Data From",
+                    "description": "Enter the field from which the data will be filter from",
+                    "type": "string"
+                },
+                "filterSetAsConnectedField": {
+                    "title": "Lookup as extra parameter",
+                    "description": "Enter the extra parameter name that will be sent to lookup for filtering",
+                    "type": "string"
                 }
             },
             "additionalProperties": false
