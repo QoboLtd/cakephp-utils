@@ -53,6 +53,16 @@
                     "type": "string",
                     "enum": ["create", "createOrUpdate"]
                 },
+                "exclude_fields": {
+                    "title": "Exclude Fields During conversion",
+                    "description": "Fields that will be excluded during the conversion",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            { "$ref": "#/definitions/fieldName" }
+                        ]
+                    }
+                },
                 "find": {
                     "title": "Conversion find mapper",
                     "description": "Mapper for fetching associated record during conversion",
