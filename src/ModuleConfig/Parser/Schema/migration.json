@@ -9,7 +9,7 @@
                 },
                 "unique": {
                     "type": "boolean",
-                    "enum": [false]
+                    "enum": [false,true]
                 }
             }
         },
