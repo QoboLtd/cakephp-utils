@@ -61,4 +61,18 @@ class ListParserTest extends TestCase
         $this->assertTrue(in_array('bar.bar_one', array_keys($resultArray['items'])));
         $this->assertTrue(in_array('bar.bar_two', array_keys($resultArray['items'])));
     }
+
+    public function testTransaction(): void
+    {
+        $file = $this->dataDir . DS . 'Foo' . DS . 'lists' . DS . 'transaction.json';
+
+        $result = $this->parser->parse($file, ['filter' => true, 'flatten' => true, 'transaction' => '']);
+        $resultArray = Convert::objectToArray($result);
+        $this->assertEquals($resultArray['transaction']['initial'], key($resultArray['items']));
+        $this->assertEquals($resultArray['transaction']['initial'], key($resultArray['items']));
+
+        $result = $this->parser->parse($file, ['filter' => true, 'flatten' => true, 'transaction' => 'in_progress']);
+        $resultArray = Convert::objectToArray($result);
+        $this->assertEquals(4, count($resultArray['items']));
+    }
 }

@@ -44,8 +44,12 @@
     "description": "List items configuration for a single CSV list",
     "type": "object",
     "properties": {
-        "title": "List items",
-        "description": "A list of items for a given list",
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
         "items": {
             "type": "array",
             "items": {
@@ -53,6 +57,11 @@
                     { "$ref": "#/definitions/listItem" }
                 ]
             },
+            "minItems": 1,
+            "uniqueItems": true
+        },
+        "transaction" : {
+            "type" : "object",
             "minItems": 1,
             "uniqueItems": true
         }
